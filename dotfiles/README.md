@@ -11,7 +11,7 @@ and can be deployed by
 
 ```
 echo "dotfiles" >> $HOME/.gitignore
-git clone --bare <git-repo-url> $HOME/dotfiles
+git clone --bare https://github.com/nnmm/dotfiles.git $HOME/dotfiles
 alias config '/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 config checkout
 ```
