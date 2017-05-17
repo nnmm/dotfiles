@@ -3,19 +3,50 @@ function ::
 end
 
 function data
-	ag -A10 "[data|newtype] $argv"
+	ag -A10 "(data|newtype|type) $argv"
 end
 
 eval (python -m virtualfish)
 
 function fish_virtualenv_prompt
 	if set -q VIRTUAL_ENV
-    	echo -n -s " (" (basename "$VIRTUAL_ENV") ")"
-    end
+		echo -n -s " (" (basename "$VIRTUAL_ENV") ")"
+	end
 end
 
 if not set -q fish_user_paths
 	set -U fish_user_paths /home/internet/.local/bin /home/internet/miniconda3/bin
+end
+
+# .local is where it's at
+set -xg LD_LIBRARY_PATH ~/.local/lib $LD_LIBRARY_PATH
+set -xg PKG_CONFIG_PATH $HOME/.local/lib/pkgconfig $PKG_CONFIG_PATH
+set -xg CMAKE_PREFIX_PATH $HOME/.local $CMAKE_PREFIX_PATH
+
+set -xg GOROOT $HOME/bin/go
+set -xg FPP_EDITOR subl
+
+# Looks nice with e.g.
+# fish_color_autosuggestion '555'  'yellow'
+# fish_color_command 00d700
+# fish_color_comment 9e9e9e
+# fish_color_cwd 87afff
+# fish_color_cwd_root red
+# fish_color_error 'red'  '--bold'
+# fish_color_escape cyan
+# fish_color_history_current cyan
+# fish_color_host '-o'  'cyan'
+# fish_color_match cyan
+# fish_color_normal normal
+# fish_color_operator cyan
+# fish_color_param '00afff'  'cyan'
+# fish_color_quote ffd75f
+# fish_color_redirection normal
+# fish_color_search_match --background=purple
+# fish_color_status d70000
+
+if not set -q fish_color_git
+	set -g fish_color_git cyan
 end
 
 function fish_prompt --description 'Write out the prompt'
