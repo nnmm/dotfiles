@@ -6,6 +6,7 @@ function data
 	ag -A10 "(data|newtype|type) $argv"
 end
 
+# Will print "No module called virtualfish" if not installed
 eval (python -m virtualfish)
 
 function fish_virtualenv_prompt
@@ -15,7 +16,10 @@ function fish_virtualenv_prompt
 end
 
 if not set -q fish_user_paths
-	set -U fish_user_paths /home/internet/.local/bin /home/internet/miniconda3/bin
+	set -U fish_user_paths $HOME/.local/bin
+	if test -d $HOME/.cargo/bin
+		set -U fish_user_paths $fish_user_paths $HOME/.cargo/bin
+	end
 end
 
 # .local is where it's at
