@@ -18,7 +18,5 @@ URxvt.tabbed.secondaryScroll: true
 URxvt.tabbed.font: xft:Bitstream Vera Sans Mono:pixelsize=12
 URxvt*inheritPixmap: true 
 URxvt*shading: 70
-URxvt.perl-lib: /home/internet/.local/bin/perl-ext
 URxvt.perl-ext-common: default,matcher,clipboard
-URxvt.keysym.Shift-Control-C: perl:clipboard:copy
-URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.clipboard.autocopy: true
