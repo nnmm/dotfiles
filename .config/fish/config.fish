@@ -7,7 +7,9 @@ function data
 end
 
 # Will print "No module called virtualfish" if not installed
-eval (python -m virtualfish)
+if type -q pip
+	eval (python -m virtualfish)
+end
 
 function fish_virtualenv_prompt
 	if set -q VIRTUAL_ENV
