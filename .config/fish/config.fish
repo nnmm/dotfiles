@@ -1,24 +1,7 @@
-function ::
-	ag "$argv ::" | fpp
-end
-
-function data
-	ag -A10 "(data|newtype|type) $argv"
-end
-
-# Will print "No module called virtualfish" if not installed
-if type -q pip
-	eval (python -m virtualfish)
-end
-
-function fish_virtualenv_prompt
-	if set -q VIRTUAL_ENV
-		echo -n -s " (" (basename "$VIRTUAL_ENV") ")"
-	end
-end
+# ================ VARIABLES ================
 
 if not set -q fish_user_paths
-	set -U fish_user_paths $HOME/.local/bin
+	set -U fish_user_paths $HOME/.local/bin /usr/sbin
 	if test -d $HOME/.cargo/bin
 		set -U fish_user_paths $fish_user_paths $HOME/.cargo/bin
 	end
@@ -31,6 +14,29 @@ set -xg CMAKE_PREFIX_PATH $HOME/.local $CMAKE_PREFIX_PATH
 
 set -xg GOROOT $HOME/bin/go
 set -xg FPP_EDITOR subl
+
+# Will print "No module called virtualfish" if not installed
+if type -q pip
+	eval (python -m virtualfish)
+end
+
+# ================ FUNCTIONS ================
+
+function ::
+	ag "$argv ::" | fpp
+end
+
+function data
+	ag -A10 "(data|newtype|type) $argv"
+end
+
+# ================= PROMPT ==================
+
+function fish_virtualenv_prompt
+	if set -q VIRTUAL_ENV
+		echo -n -s " (" (basename "$VIRTUAL_ENV") ")"
+	end
+end
 
 # Looks nice with e.g.
 # fish_color_autosuggestion '555'  'yellow'
