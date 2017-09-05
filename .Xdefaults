@@ -2,10 +2,10 @@ URxvt.saveLines: 1000
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.scrollBar: false
-URxvt.foreground: white
+URxvt.foreground: #D0D0D0
 URxvt.background: black
 URxvt.secondaryScroll: true
-URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=12
+URxvt.font: xft:Input Mono:pixelsize=14
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 1
 URxvt.tabbed.saveLines: 1000
@@ -20,3 +20,20 @@ URxvt*inheritPixmap: true
 URxvt*shading: 70
 URxvt.perl-ext-common: default,matcher,clipboard
 URxvt.clipboard.autocopy: true
+
+*color0:  #2e3436
+*color1:  #b8484a
+*color2:  #a0a74a
+*color3:  #d6a14c
+*color4:  #487da2
+*color5:  #9b68a2
+*color6:  #69a8a2
+*color7:  #babdb9
+*color8:  #555753
+*color9:  #ce4a4c
+*color10: #d2da67
+*color11: #f3dc55
+*color12: #5da4d4
+*color13: #d378e1
+*color14: #71c0b0
+*color15: #eeeeec
