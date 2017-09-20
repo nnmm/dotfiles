@@ -7,10 +7,22 @@ if not set -q fish_user_paths
 	end
 end
 
+# other path-like variables with colon separator are handled differently
+# we need to append manually
+function append
+	if set -q argv[2]
+		if set -q $argv[1]
+			set -xg $argv[1] "$$argv[1]":$argv[2]
+		else
+			set -xg $argv[1] $argv[2]; true
+		end
+	end
+end
+
 # .local is where it's at
-set -xg LD_LIBRARY_PATH ~/.local/lib $LD_LIBRARY_PATH
-set -xg PKG_CONFIG_PATH $HOME/.local/lib/pkgconfig $PKG_CONFIG_PATH
-set -xg CMAKE_PREFIX_PATH $HOME/.local $CMAKE_PREFIX_PATH
+append LD_LIBRARY_PATH ~/.local/lib
+append PKG_CONFIG_PATH $HOME/.local/lib/pkgconfig
+append CMAKE_PREFIX_PATH $HOME/.local
 
 set -xg GOROOT $HOME/bin/go
 set -xg FPP_EDITOR subl
@@ -18,6 +30,11 @@ set -xg FPP_EDITOR subl
 # Will print "No module called virtualfish" if not installed
 if type -q pip
 	eval (python -m virtualfish)
+end
+
+# for machine-specific configuration
+if test -f $HOME/.config/fish/local_machine.fish
+	source $HOME/.config/fish/local_machine.fish
 end
 
 # ================ FUNCTIONS ================
