@@ -1,5 +1,5 @@
 [main]
-ChangePanel = ctrl-tab
+ChangePanel = ctrl-tab; ctrl-shift-tab
 Help = f1
 UserMenu = f2
 View = f3
