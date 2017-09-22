@@ -35,7 +35,7 @@ shell_patterns=0
         done
 
 t       Open new terminal here
-        nohup urxvt -cd "%d" &
+        nohup urxvt -cd "%d" >/dev/null 2>&1  &
 
 =+ f \.1$ | f \.3$ | f \.4$ | f \.5$ | f \.6$ | f \.7$ | f \.8$ | f \.man$ & t r
 1       Display the file with roff -man
