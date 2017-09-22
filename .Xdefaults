@@ -18,7 +18,7 @@ URxvt.tabbed.secondaryScroll: true
 URxvt.tabbed.font: xft:Bitstream Vera Sans Mono:pixelsize=12
 URxvt*inheritPixmap: true 
 URxvt*shading: 70
-URxvt.perl-ext-common: default,matcher,clipboard
+URxvt.perl-ext-common: default,matcher
 URxvt.clipboard.autocopy: true
 
 *color0:  #2e3436
