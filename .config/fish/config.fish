@@ -37,6 +37,10 @@ if test -f $HOME/.config/fish/local_machine.fish
 	source $HOME/.config/fish/local_machine.fish
 end
 
+if test -f $HOME/.autojump/share/autojump/autojump.fish
+	. $HOME/.autojump/share/autojump/autojump.fish
+end
+
 # ================ FUNCTIONS ================
 
 function ::
