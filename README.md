@@ -13,7 +13,7 @@ and can be deployed by
 
 ```
 echo "dotfiles" >> $HOME/.gitignore
-git clone --bare https://github.com/nnmm/dotfiles.git $HOME/dotfiles
+git clone --bare git@github.com:nnmm/dotfiles.git $HOME/dotfiles
 alias dotfiles '/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 dotfiles config --local status.showUntrackedFiles no
 dotfiles checkout
