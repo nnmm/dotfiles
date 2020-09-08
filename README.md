@@ -21,3 +21,4 @@ dotfiles checkout
 
 ## Credits
 Dircolors by [ivoarch](https://github.com/ivoarch/dircolors-zenburn).
+gdbinit by [cyrus-and](https://github.com/cyrus-and/gdb-dashboard).
