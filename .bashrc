@@ -117,3 +117,4 @@ if ! shopt -oq posix; then
 fi
 
 alias gco='git checkout'
+alias ll='ls -lh'
