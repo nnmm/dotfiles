@@ -24,7 +24,6 @@ append LD_LIBRARY_PATH ~/.local/lib
 append PKG_CONFIG_PATH $HOME/.local/lib/pkgconfig
 append CMAKE_PREFIX_PATH $HOME/.local
 
-set -xg GOROOT $HOME/bin/go
 set -xg FPP_EDITOR subl
 
 # Will print "No module called virtualfish" if not installed

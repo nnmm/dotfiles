@@ -117,4 +117,5 @@ if ! shopt -oq posix; then
 fi
 
 alias gco='git checkout'
+alias gp='git push --set-upstream dev $(git symbolic-ref --short HEAD)'
 alias ll='ls -lh'

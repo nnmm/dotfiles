@@ -25,6 +25,10 @@ sudo chown root:root (which light)
 sudo chmod 4711 (which light)
 ```
 
+## Other
+```
+abbr -a gco 'git checkout'
+```
 
 ## Trying to remember how to compile mc?
 ```
