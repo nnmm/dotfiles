@@ -156,9 +156,16 @@ bar {
         status_command i3status
 }
 
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master 3%-"
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master 3%+"
 bindsym XF86MonBrightnessUp exec "light -A 5"
 bindsym XF86MonBrightnessDown exec "light -U 5"
 bindsym $mod+z move workspace to output eDP-1-1
 bindsym $mod+p move workspace to output HDMI-0
 
-bindsym $mod+Mod1+e exec "i3lock"
+# TODO(not working): bindsym $mod+Mod1+e exec "i3lock"
+
+bindsym Print exec "gnome-screenshot -i"
+assign [class="^simulator$"] 10
+# TODO(not working): no_focus [class="^simulator$"]

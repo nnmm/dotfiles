@@ -115,7 +115,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-alias gco='git checkout'
-alias gp='git push --set-upstream dev $(git symbolic-ref --short HEAD)'
-alias ll='ls -lh'
