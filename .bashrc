@@ -117,3 +117,5 @@ if ! shopt -oq posix; then
 fi
 
 export PATH=$HOME/.local/bin:$PATH
+# This is so that we can use ${SHELL} in .tmux.conf
+export SHELL
