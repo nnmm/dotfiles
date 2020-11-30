@@ -110,3 +110,4 @@ export PATH=$HOME/.local/bin:$PATH
 export SHELL
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"

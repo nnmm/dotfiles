@@ -19,7 +19,7 @@ dotfiles checkout
 * `sudo apt update && sudo apt install -y tmux xsel htop vlc tree git redshift-gtk`
 * `sudo apt update && sudo apt install -y i3 i3status i3lock feh`
 * Sublime Text from the website
-* `rg`, `fd`, `bat`, `fzf`, `fpp` from GitHub.
+* `rg`, `fd`, `bat`, `delta`, `fzf`, `fpp` from GitHub.
 
 Put any bash completion scripts inside `~/.bash_completions.d`.
 
