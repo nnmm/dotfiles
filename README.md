@@ -18,8 +18,9 @@ dotfiles checkout
 
 * `sudo apt update && sudo apt install -y tmux xsel htop vlc tree git redshift-gtk`
 * `sudo apt update && sudo apt install -y i3 i3status i3lock feh`
-* Sublime Text from the website
-* `rg`, `fd`, `bat`, `delta`, `fzf`, `fpp` from GitHub.
+* Sublime Text from the website, with extensions `TextPastry`, `MoveTab`, `LSP`
+* `ripgrep`, `fd`, `bat`, `delta`, `fzf`, `fpp`, `micro` from GitHub.
+* `starship` from the website
 
 Put any bash completion scripts inside `~/.bash_completions.d`.
 
@@ -38,7 +39,7 @@ sudo apt install libslang2-dev libglib2.0-dev libx11-dev libgpm-dev libext2fs-de
 ```
 
 ### Configuring stuff
-* Enable tab cycling in Firefox
+* Enable tab cycling and `accessibility.tabfocus=1` in Firefox
 * Create ssh key with `ssh-keygen -t ed25519`
 
 
