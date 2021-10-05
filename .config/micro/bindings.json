@@ -1,0 +1,5 @@
+{
+    "Alt-/": "lua:comment.comment",
+    "Ctrl-l": "SelectLine",
+    "CtrlUnderscore": "lua:comment.comment"
+}
