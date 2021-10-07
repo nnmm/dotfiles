@@ -1,0 +1,56 @@
+ general {
+         output_format = "i3bar"
+         colors = true
+         color_good = "#fff3b0"
+         color_degraded = "#e09f3e"
+         color_bad = "#9e2a2b"
+         interval = 5
+         # The separator is managed by i3bar I think
+ }
+
+ order += "disk /"
+ order += "wireless wlan0"
+ order += "ethernet eth0"
+ order += "battery 0"
+ # order += "cpu_temperature 0"
+ order += "tztime berlin"
+
+ disk "/" {
+         format = "%free disk space"
+ }
+ 
+ wireless wlan0 {
+         format_up = "W: (%quality at %essid, %bitrate) %ip"
+         format_down = "W: down"
+ }
+
+ ethernet eth0 {
+         # if you use %speed, i3status requires the cap_net_admin capability
+         format_up = "E: %ip (%speed)"
+         format_down = "E: down"
+ }
+
+ battery 0 {
+         format = "Battery %status %percentage %remaining %emptytime"
+         format_down = "No battery"
+         status_chr = "⚡ CHR"
+         status_bat = "🔋 BAT"
+         status_unk = "? UNK"
+         status_full = "☻ FULL"
+         path = "/sys/class/power_supply/BAT%d/uevent"
+         low_threshold = 10
+ }
+
+ tztime berlin {
+         format = "%Y-%m-%d %H:%M:%S %Z    Configuration in ~/.config/i3status/config"
+         timezone = "Europe/Berlin"
+ }
+
+#  cpu_temperature 0 {
+#          format = "T: %degrees °C"
+#          path = "/sys/devices/platform/coretemp.0/temp1_input"
+# }
+
+
+
+ 
