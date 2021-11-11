@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Obsidian
+Comment=Edit Markdown files
+Exec=/home/user/.local/bin/obsidian
+Icon=obsidian.png
+Terminal=false
+Type=Application
+Categories=Office;WordProcessor;
+MimeType=x-scheme-handler/obsidian;text/html;
