@@ -16,15 +16,17 @@ dotfiles checkout
 
 ### Installing software
 
-* `sudo apt update && sudo apt install -y tmux xsel htop vlc tree git redshift-gtk`
+* `sudo apt update && sudo apt install -y tmux xsel htop vlc tree git redshift-gtk light`
 * `sudo apt update && sudo apt install -y i3 i3status i3lock feh`
 * Sublime Text from the website, with extensions `TextPastry`, `MoveTab`, `LSP`
-* `ripgrep`, `fd`, `bat`, `delta`, `fzf`, `fpp`, `micro` from GitHub.
+* `ripgrep`, `fd`, `bat`, `delta`, `fzf`, `fpp`, `micro`, `libtree` from GitHub.
 * `starship` from the website
 
 Put any bash completion scripts inside `~/.bash_completions.d`.
 
 ### i3 deps
+If `light` was built from source:
+
 ```
 sudo chown root:root (which light)
 sudo chmod 4711 (which light)
@@ -40,6 +42,7 @@ sudo apt install libslang2-dev libglib2.0-dev libx11-dev libgpm-dev libext2fs-de
 
 ### Configuring stuff
 * Enable tab cycling and `accessibility.tabfocus=1` in Firefox
+* Install "Move Tab Hotkeys" Firefox extension and set shortcut to Ctrl-Alt-Left/Ctrl-Alt-Right
 * Create ssh key with `ssh-keygen -t ed25519`
 
 

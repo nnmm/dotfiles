@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set_from_resource $home echo $HOME
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -157,7 +158,7 @@ bindsym $mod+w mode "windowmanipulation"
 # finds out, if available)
 bar {
         mode hide
-        status_command i3status -c /home/nikolai.morin/.config/i3status/config
+        status_command i3status -c $home/.config/i3status/config
         colors {
                 statusline #fff3b0
                 focused_workspace #ffffff #335c67
