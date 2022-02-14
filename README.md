@@ -42,8 +42,9 @@ sudo apt install libslang2-dev libglib2.0-dev libx11-dev libgpm-dev libext2fs-de
 
 ### Configuring stuff
 * Enable tab cycling and `accessibility.tabfocus=1` in Firefox
-* Install "Move Tab Hotkeys" Firefox extension and set shortcut to Ctrl-Alt-Left/Ctrl-Alt-Right
+* Install the "Move Tab Hotkeys" Firefox extension and set shortcut to Ctrl-Alt-Left/Ctrl-Alt-Right
 * Create ssh key with `ssh-keygen -t ed25519`
+* Install the "MoveTab" extension for Sublime Text
 
 
 ## TODO

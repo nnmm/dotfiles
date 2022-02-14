@@ -165,7 +165,8 @@ bar {
         }
 }
 
-bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+# https://bugs.launchpad.net/ubuntu/+source/pulseaudio/+bug/878986
+bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ togglemute"
 bindsym XF86AudioLowerVolume exec "amixer -q sset Master 3%-"
 bindsym XF86AudioRaiseVolume exec "amixer -q sset Master 3%+"
 bindsym XF86MonBrightnessUp exec "light -A 5"
