@@ -5,6 +5,9 @@
 [push]
 	default = current
 
+[branch]
+	sort = -committerdate
+
 [core]
 	editor = micro
 	pager = delta
@@ -18,6 +21,7 @@
 [merge]
 	conflictstyle = diff3
 	renamelimit = 153450
+
 [alias]
 	amend = commit --amend --no-edit --author='Nikolai Morin <nikolai.morin@apex.ai>'
 	pushypush = push --force-with-lease
