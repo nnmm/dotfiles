@@ -63,5 +63,6 @@ fi
 
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 eval "$(starship init bash)"
+eval "$(fnm env --use-on-cd)"
 
 export FPP_EDITOR='bat'
