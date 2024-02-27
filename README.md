@@ -17,7 +17,7 @@ dotfiles checkout
 ### Installing software
 
 * `sudo apt update && sudo apt install -y tmux xsel htop vlc tree git redshift-gtk light`
-* `sudo apt update && sudo apt install -y i3 i3status i3lock feh`
+* `sudo apt update && sudo apt install -y i3 i3status i3lock xautolock feh`
 * Sublime Text from the website, with extensions `TextPastry`, `MoveTab`, `LSP`
 * `ripgrep`, `fd`, `bat`, `delta`, `fzf`, `fpp`, `micro`, `libtree` from GitHub.
 * `starship` from the website

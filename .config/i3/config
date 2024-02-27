@@ -23,6 +23,9 @@ font pango:monospace 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Autolock the screen after 8 minutes
+exec "xautolock -detectsleep -time 8 -locker \"i3lock -c A0A0A0\""
+
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
 # bindsym $mod+Return exec i3-sensible-terminal
@@ -171,8 +174,8 @@ bindsym XF86AudioLowerVolume exec "amixer -q sset Master 3%-"
 bindsym XF86AudioRaiseVolume exec "amixer -q sset Master 3%+"
 bindsym XF86MonBrightnessUp exec "light -A 5"
 bindsym XF86MonBrightnessDown exec "light -U 5"
-bindsym $mod+z move workspace to output eDP-1-1
-bindsym $mod+p move workspace to output HDMI-0
+bindsym $mod+p move workspace to output eDP-1-1
+bindsym $mod+z move workspace to output DP-1
 bindsym Mod1+Tab workspace back_and_forth
 
 # TODO(not working): bindsym $mod+Mod1+e exec "i3lock"
