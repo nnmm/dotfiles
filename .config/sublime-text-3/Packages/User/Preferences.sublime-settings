@@ -6,5 +6,7 @@
 		"Vintage"
 	],
 	"tab_size": 2,
-	"theme": "Default.sublime-theme"
+	"theme": "Default.sublime-theme",
+	"index_files": true,
+	"save_on_focus_lost": true,
 }
