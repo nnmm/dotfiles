@@ -2274,6 +2274,15 @@ set python print-stack full
 
 python Dashboard.start()
 
+# Niko's settings --------------------------------------------------------------
+
+set disassembly-flavor intel
+set breakpoint pending on
+set print elements 10000
+directory ~/ade-home/gc2/apex_ws/src/bazel-src
+dashboard source -style height 30
+dashboard assembly
+
 # File variables ---------------------------------------------------------------
 
 # vim: filetype=python
