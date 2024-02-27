@@ -1,5 +1,6 @@
 {
     "Alt-/": "lua:comment.comment",
     "Ctrl-l": "SelectLine",
+    "Ctrl-w": "Quit",
     "CtrlUnderscore": "lua:comment.comment"
 }
