@@ -13,17 +13,6 @@ $hg_branch\
 $pijul_channel\
 $docker_context\
 $package\
-$c\
-$cmake\
-$erlang\
-$golang\
-$haskell\
-$nodejs\
-$ocaml\
-$python\
-$rust\
-$zig\
-$nix_shell\
 $memory_usage\
 $env_var\
 $custom\
