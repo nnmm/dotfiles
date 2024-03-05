@@ -336,6 +336,26 @@ $env.config = {
                 description_text: yellow
             }
         }
+        {
+            name: git_unmerged_files_menu
+            only_buffer_difference: true
+            marker: "? "
+            type: {
+                layout: list
+                page_size: 40
+            }
+            style: {
+                text: "#66ff66"
+                selected_text: { fg: "#66ff66" attr: r }
+                description_text: yellow
+            }
+            source: { |buffer, position|
+                git diff --name-status
+                | lines
+                | parse "{status}\t{name}"
+                | each {|v| {value: $v.name description: $v.status } }
+            }
+        }
     ]
 
     keybindings: [
@@ -580,18 +600,6 @@ $env.config = {
             }
         }
         {
-            name: move_down
-            modifier: control
-            keycode: char_t
-            mode: [emacs]
-            event: {
-                until: [
-                    {send: menudown}
-                    {send: down}
-                ]
-            }
-        }
-        {
             name: delete_one_character_backward
             modifier: none
             keycode: backspace
@@ -768,6 +776,13 @@ $env.config = {
             mode: emacs
             event: { edit: pastecutbufferbefore }
         }
+        {
+          name: git_prompt_unmerged_files
+          modifier: control
+          keycode: char_g
+          mode: [emacs, vi_normal, vi_insert]
+          event: { send: menu name: git_unmerged_files_menu }
+        }
     ]
 }
 
@@ -778,10 +793,11 @@ $env.config = {
 
 alias ll = ls -la
 
-
 alias ga = git add
 alias gc = git checkout
 alias gd = git diff
+alias gr = git restore
+alias grso = git reset --hard $"origin/(git symbolic-ref --short HEAD)"
 alias gs = git status
 
 alias dotfiles = git --git-dir $"($nu.home-path)/ade-home/dotfiles/" --work-tree $"($nu.home-path)/ade-home"
