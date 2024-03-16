@@ -345,8 +345,8 @@ $env.config = {
                 page_size: 40
             }
             style: {
-                text: "#66ff66"
-                selected_text: { fg: "#66ff66" attr: r }
+                text: green
+                selected_text: green_reverse
                 description_text: yellow
             }
             source: { |buffer, position|
@@ -445,13 +445,6 @@ $env.config = {
             keycode: char_d
             mode: [emacs]
             event: { send: ctrld }
-        }
-        {
-            name: clear_screen
-            modifier: control
-            keycode: char_l
-            mode: [emacs]
-            event: { send: clearscreen }
         }
         {
             name: search_history
@@ -777,11 +770,81 @@ $env.config = {
             event: { edit: pastecutbufferbefore }
         }
         {
+            name: reload_config
+            modifier: none
+            keycode: f5
+            mode: [emacs vi_normal vi_insert]
+            event: {
+              send: executehostcommand,
+              cmd: $"source '($nu.env-path)';source '($nu.config-path)'"
+            }
+        }
+        {
           name: git_prompt_unmerged_files
           modifier: control
           keycode: char_g
           mode: [emacs, vi_normal, vi_insert]
-          event: { send: menu name: git_unmerged_files_menu }
+          event: [
+            { edit: insertstring value: ":/" }
+            { send: menu name: git_unmerged_files_menu }
+          ]
+        }
+        {
+          name: fuzzy_file
+          modifier: control
+          keycode: char_t
+          mode: emacs
+          event: {
+            send: executehostcommand
+            cmd: "commandline edit --insert (fzf --layout=reverse)"
+          }
+        }
+        {
+          name: prompt_labels_regular
+          modifier: control
+          keycode: char_l
+          mode: emacs
+          event: {
+            send: executehostcommand
+            cmd: "bazel_targets_action 'non-test'"
+          }
+        }
+        {
+          name: prompt_labels_all
+          modifier: control_alt
+          keycode: char_l
+          mode: emacs
+          event: {
+            send: executehostcommand
+            cmd: "bazel_targets_action 'all'"
+          }
+        }
+        {
+          name: prompt_labels_tests
+          modifier: alt
+          keycode: char_l
+          mode: emacs
+          event: {
+            send: executehostcommand
+            cmd: "bazel_targets_action 'test'"
+          }
+        }
+        {
+          name: colcon_pkgs
+          modifier: alt
+          keycode: char_c
+          mode: emacs
+          event: {
+            send: executehostcommand
+            cmd: "commandline edit --insert (
+              fd -I -E build/ -E install/ -E log/ -F package.xml --type file
+              | lines
+              | each {|file| open $file | get content.0.content.content.0 }
+              | sort
+              | str join "\n"
+              | ^fzf
+            )"
+          }
         }
     ]
 }
@@ -803,10 +866,95 @@ alias gs = git status
 alias dotfiles = git --git-dir $"($nu.home-path)/ade-home/dotfiles/" --work-tree $"($nu.home-path)/ade-home"
 
 alias bb = bazel build
-alias bt = bazel test
+alias bb = bazel test
 alias br = bazel run
 alias bq = bazel query
 alias bnb = bazel build --nobuild //...
+
+###############################################################
+# Custom commands
+###############################################################
+
+const bazel_label_cache = $"($nu.home-path)/.bazel_targets_cache.json"
+
+def update_bazel_targets_cache [] {
+	echo "Query 1 of 2 …"
+	let non_test_targets = (
+		bazel query --noshow_progress --output location 'filter("^.*:[^_].*$", attr(testonly, 0, //...))' |
+		lines |
+		parse '{file}:{line}:{col}: {kind} rule {label}' |
+		each {|it| {file: $it.file line: $it.line kind: $it.kind label: $it.label testonly: false}}
+	)
+	echo "Query 2 of 2 …"
+	let test_targets = (
+		bazel query --noshow_progress --output location 'filter("^.*:[^_].*$", attr(testonly, 1, //...))' |
+		lines |
+		parse '{file}:{line}:{col}: {kind} rule {label}' |
+		each {|it| {file: $it.file line: $it.line kind: $it.kind label: $it.label testonly: true}}
+	)
+	let all_targets = $non_test_targets ++ $test_targets
+	$all_targets | to json | save --force $bazel_label_cache
+}
+
+def "bazel_labels_completion only_tests" [] {
+	open $bazel_label_cache | where testonly == true | get label
+}
+def "bazel_labels_completion only_regular" [] {
+	open $bazel_label_cache | where testonly == false | get label
+}
+def "bazel_labels_completion all" [] {
+	open $bazel_label_cache | each {|it| $it.label}
+}
+
+def target_groups [] {
+    ["non-test", "test", "all"]
+}
+
+def prompt_bazel_targets [
+    target_group: string@target_groups = "non-test"
+] {
+    let db = if $target_group == "non-test" {
+        open $bazel_label_cache | where testonly == false
+    } else if $target_group == "test" {
+        open $bazel_label_cache | where testonly == true
+    } else if $target_group == "all" {
+        open $bazel_label_cache
+    } else {
+        error make {msg: $"valid choices for 'target_group' argument are: (target_groups)"}
+    }
+    let selected_labels = $db |
+        each {|it| $"($it.label) (ansi light_gray_dimmed)($it.kind)(ansi reset)" } |
+        to text |
+        fzf --multi --ansi  # funny: fzf apparently already strips out the ansi-colored parts
+    $db | where label in $selected_labels
+}
+
+def bazel_targets_action [
+    target_group: string@target_groups = "non-test"
+] {
+    let selection = prompt_bazel_targets $target_group
+    if ($selection | length) == 0 {
+        return
+    }
+    let label_list = $selection | get label | str join ' '
+    let get_bazel_bin_path = {|it|
+        $it.label |
+        parse '//{package}:{target_name}' |
+        $"bazel-bin/($in.0.package)/($in.0.target_name)"
+    }
+    let action_idx = [
+        "0: insert onto commandline"
+        "1: insert bazel-bin path onto commandline"
+        "2: open BUILD.bazel files in editor"
+        "3: copy to clipboard"
+    ] | input list --fuzzy --index $"Action for '($label_list)':"
+    match $action_idx {
+        0 => (commandline edit --insert ($label_list)),
+        1 => (commandline edit --insert ($selection | each $get_bazel_bin_path | str join ' ')),
+        2 => (subl $"($selection | each {|it| $it.file + ':' + $it.line } | str join ' ')"),
+        3 => ($label_list | xsel -ib),
+    }
+}
 
 ###############################################################
 # Shell hooks
