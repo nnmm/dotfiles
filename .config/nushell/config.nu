@@ -800,6 +800,16 @@ $env.config = {
           }
         }
         {
+          name: fuzzy_dir
+          modifier: alt
+          keycode: char_d
+          mode: emacs
+          event: {
+            send: executehostcommand
+            cmd: "commandline edit --insert (fd . --type d | fzf --layout=reverse)"
+          }
+        }
+        {
           name: prompt_labels_regular
           modifier: control
           keycode: char_l
@@ -868,6 +878,7 @@ alias dotfiles = git --git-dir $"($nu.home-path)/ade-home/dotfiles/" --work-tree
 alias bb = bazel build
 alias bb = bazel test
 alias br = bazel run
+alias bt = bazel test
 alias bq = bazel query
 alias bnb = bazel build --nobuild //...
 
@@ -894,16 +905,6 @@ def update_bazel_targets_cache [] {
 	)
 	let all_targets = $non_test_targets ++ $test_targets
 	$all_targets | to json | save --force $bazel_label_cache
-}
-
-def "bazel_labels_completion only_tests" [] {
-	open $bazel_label_cache | where testonly == true | get label
-}
-def "bazel_labels_completion only_regular" [] {
-	open $bazel_label_cache | where testonly == false | get label
-}
-def "bazel_labels_completion all" [] {
-	open $bazel_label_cache | each {|it| $it.label}
 }
 
 def target_groups [] {
